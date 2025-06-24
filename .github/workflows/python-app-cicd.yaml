@@ -61,14 +61,30 @@ jobs:
           chmod +x argocd
           sudo mv ./argocd /usr/local/bin/argocd
 
-      - name: argocd login
+      # - name: argocd login
+      #   shell: bash
+      #   run: |
+      #     argocd login argocd-server.argocd \
+      #       --insecure  \
+      #       --grpc-web \
+      #       --username admin \
+      #       --password  ${{ secrets.ARGOCD_PASSWORD }}
+
+      - name: ArgoCD Login
         shell: bash
         run: |
-          argocd login argocd-server.argocd \
-            --insecure  \
+          LOGIN_STATUS=$(argocd login argocd-server.argocd \
+            --insecure \
             --grpc-web \
             --username admin \
-            --password  ${{ secrets.ARGOCD_PASSWORD }}
+            --password ${{ secrets.ARGOCD_PASSWORD }} 2>&1)
+
+          if [[ $LOGIN_STATUS == *"EOF"* ]] || [[ $LOGIN_STATUS == *"Proceed (y/n)?"* ]]; then
+            echo "Login failed due to insecure server or connectivity issue."
+            exit 20
+          else
+            echo "ArgoCD login successful."
+          fi
 
       - name: Ensure argocd repo and app
         shell: bash
