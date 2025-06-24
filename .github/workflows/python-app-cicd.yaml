@@ -101,7 +101,7 @@ jobs:
             --dest-namespace test \
             --dest-server https://kubernetes.default.svc \
             --values values-test.yaml \
-            --revision master \
+            --revision main \
             --sync-policy manual \
             --sync-option CreateNamespace=true
 
