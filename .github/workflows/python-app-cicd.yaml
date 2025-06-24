@@ -60,7 +60,6 @@ jobs:
           ls -ltr
           chmod +x argocd
           sudo mv ./argocd /usr/local/bin/argocd
-          argocd version
 
       - name: argocd login
         shell: bash
