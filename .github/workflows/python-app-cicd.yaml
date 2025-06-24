@@ -56,12 +56,9 @@ jobs:
       - name: Install argocd
         shell: bash
         run: |
-          VERSION=$(curl -L -s https://raw.githubusercontent.com/argoproj/argo-cd/stable/VERSION)
-          echo "Downloading ArgoCD version $VERSION..."
-          curl -sSL -o argocd "https://github.com/argoproj/argo-cd/releases/download/$VERSION/argocd-linux-amd64"
-          chmod +x argocd
-          file argocd
-          sudo mv argocd /usr/local/bin/argocd
+          curl -ksSL -o argocd https://github.com/argoproj/argo-cd/releases/download/v3.0.6/argocd-linux-amd64
+          chmod +x argocd-linux-amd64
+          sudo mv ./argocd-linux-amd64 /usr/local/bin/argocd
           argocd version
 
       - name: argocd login
