@@ -5,7 +5,7 @@ import random
 
 
 dev_excuses = [
-    "It worked on my machine,,,,,,,.......112233",
+    "It worked on my machine,,,,,,,.......11223344",
     "I thought I fixed that.",
     "That's just a warning, not an error.",
     "You must have a corrupted database.",
